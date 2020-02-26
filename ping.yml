@@ -1,0 +1,7 @@
+---
+
+- name: ping
+  hosts: group_wordpress
+  become: yes
+  tesk:
+    - name: ping_eric_serv
