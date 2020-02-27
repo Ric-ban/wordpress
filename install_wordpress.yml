@@ -1,11 +1,12 @@
 ---
 
-- name: ping
-  hosts: wordpress
-  become: yes
-  tasks:
-    - name: ping_machine_cible
+  - name: ping
+    hosts: wordpress
+    become: yes
+    tasks:
+      - name: ping_eric_serv
       ping:
+
 # PHP
     - name: Add the ondrej PHP PPA
       apt_repository:
