@@ -11,7 +11,7 @@
     - name: Add the ondrej PHP PPA
       apt_repository:
         repo: 'ppa:ondrej/php'
-        
+
     - name: Install PHP
       package:
         name: "{{ item }}"
@@ -69,11 +69,6 @@
       template:
         src: templates/mysql/my.cnf.j2
         dest: /root/.my.cnf
-
-    - name: Create mysqld.cnf
-      template:
-        src: mysqld.cnf.j2
-        dest: /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # installation NGINX
     - name: Install nginx
