@@ -1,4 +1,4 @@
-eric_serv ansible_hosts=10.5.169.231 &nsible_user=root
+eric_serv ansible_hosts=10.5.169.231 &ansible_user=root
 
 [group_wordpress]
 eric_serv
