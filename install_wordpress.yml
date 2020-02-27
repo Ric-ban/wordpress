@@ -4,7 +4,7 @@
   hosts: group_wordpress
   become: yes
   tasks:
-    -name: ric_ping_serv
+    - name: ric_ping_serv
       ping:
 
   # PHP
