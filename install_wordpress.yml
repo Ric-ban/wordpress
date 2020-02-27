@@ -6,3 +6,13 @@
   tasks:
     - name: ric_ping_serv
       ping:
+
+# PHP
+    - name: Add the ondrej PHP PPA
+      apt_repository:
+        repo: 'ppa:ondrej/php'
+
+    - name: Install php
+      package:
+        name: "{{ item }}"
+        state: present
