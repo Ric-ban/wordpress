@@ -59,7 +59,7 @@
         - localhost
     - name: Create my.cnf
       template:
-        src: my.cnf.j2
+        src: templates/mysql/my.cnf.j2
         dest: /root/.my.cnf
     - name: Create mysqld.cnf
       template:
