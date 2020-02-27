@@ -11,6 +11,7 @@
     - name: Add the ondrej PHP PPA
       apt_repository:
         repo: 'ppa:ondrej/php'
+        
     - name: Install PHP
       package:
         name: "{{ item }}"
@@ -20,6 +21,7 @@
         - php-fpm
         - php-mysql
         - php-xml
+
     - name: Remove apache2
       package:
         name: apache2
@@ -67,6 +69,7 @@
       template:
         src: templates/mysql/my.cnf.j2
         dest: /root/.my.cnf
+
     - name: Create mysqld.cnf
       template:
         src: mysqld.cnf.j2
@@ -77,10 +80,12 @@
       package:
         name: nginx
         state: present
+
     - name: Start nginx
       service:
         name: nginx
         state: started
+
     - name: Create nginx config
       template:
         src: templates/nginx/default.j2
@@ -92,16 +97,19 @@
       args:
         creates: /root/.my.cnf
         register: mysql_new_root_pass
+
     - name: Removeanonymous users
       mysql_user:
         name: ""
         state: absent
       when: mysql_new_root_pass.changed
+
     - name: Remove test database
       mysql_db:
         name: test
         state: absent
       when: mysql_new_root_pass.changed
+
     - name: Output new root password
       debug:
         msg: "new root password is {{mysql_new_root_pass.stdout}}"
