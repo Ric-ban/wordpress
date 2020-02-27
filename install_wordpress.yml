@@ -1,10 +1,10 @@
 ---
 
-  - name: ping
-    hosts: wordpress
-    become: yes
-    tasks:
-      - name: ping_eric_serv
+- name: ping
+  hosts: group_wordpress
+  become: yes
+  tasks:
+    - name: ping_machine_cible
       ping:
 
 # PHP
