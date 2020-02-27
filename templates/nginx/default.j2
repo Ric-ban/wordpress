@@ -1,5 +1,9 @@
 ---
 
+upstream php {
+        server unix:{{ fpm_sock }};
+}
+
 server {
         server_name book.example.com;
         root /var/www/book.example.com;
