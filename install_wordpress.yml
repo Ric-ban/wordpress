@@ -1,0 +1,13 @@
+---
+
+- name: ping
+  hosts: group_wordpress
+  become: yes
+  tasks:
+      ping:
+
+# PHP
+- name: Add the ondrej PHP PPA
+  apt_repository:
+    repo: 'ppa:ondrej/php'
+    
