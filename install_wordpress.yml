@@ -44,17 +44,17 @@
             creates: /root/.my.cnf
           register: mysql_new_root_pass
 
-        # - name: Remove anonymous users
-        #   mysql_user:
-        #     name: ""
-        #     state: absent
-        #   when: mysql_new_root_pass.changed
-        #
-        # - name: remove test database
-        #   mysql_db:
-        #     name: test
-        #     state: absent
-        #   when: mysql_new_root_pass.changed
+        - name: Remove anonymous users
+          mysql_user:
+            name: ""
+            state: absent
+          when: mysql_new_root_pass.changed
+
+        - name: remove test database
+          mysql_db:
+            name: test
+            state: absent
+          when: mysql_new_root_pass.changed
 
         - name: Output new root password
           debug:
@@ -65,12 +65,13 @@
           mysql_user:
             name: root
             host: "{{ item }}"
-            password: "{{mysql_new_root_pass.stdout}}"
+            password: "{{ mysql_new_root_pass.stdout }}"
           loop:
             - "{{ ansible_hostname }}"
             - 127.0.0.1
             - ::1
             - localhost
+
         - name: Create my.cnf
           template:
             src: templates/mysql/my.cnf.j2
