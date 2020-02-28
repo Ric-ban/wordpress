@@ -32,25 +32,23 @@
             - mysql-server
             - python-mysqldb
 
+
         - name: Create mysqld.cnf
           template:
             src: templates/mysql/mysqld.cnf.j2
             dest: /etc/mysql/mysql.conf.d/mysqld.cnf
           notify: restart mysql
 
+        - name: Delete mysql.conf
+          file:
+            state: absent
+            path: /root/.my.cnf
+
         - name: Generate new root password
           command: openssl rand -hex 7
           args:
             creates: /root/.my.cnf
           register: mysql_new_root_pass
-
-        - name: Display mysql_root_passwd
-          debug:
-            var: mysql_new_root_pass
-
-        - name: Display stdout
-          debug:
-            var: mysql_new_root_pass.stdout
 
         - name: Remove anonymous users
           mysql_user:
