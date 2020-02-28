@@ -44,6 +44,14 @@
             creates: /root/.my.cnf
           register: mysql_new_root_pass
 
+        - name: Display mysql_root_passwd
+          debug:
+            var: mysql_new_root_pass
+
+        - name: Display stdout
+          debug:
+            var: mysql_new_root_pass.stdout
+
         - name: Remove anonymous users
           mysql_user:
             name: ""
