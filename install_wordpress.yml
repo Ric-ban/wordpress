@@ -44,27 +44,22 @@
             creates: /root/.my.cnf
           register: mysql_new_root_pass
 
-        # - name: Remove anonymous users
-        #   mysql_user:
-        #     name: ""
-        #     state: absent
-        #   when: mysql_new_root_pass.changed
-        #
-        # - name: remove test database
-        #   mysql_db:
-        #     name: test
-        #     state: absent
-        #   when: mysql_new_root_pass.changed
+        - name: Remove anonymous users
+          mysql_user:
+            name: ""
+            state: absent
+          when: mysql_new_root_pass.changed
+
+        - name: remove test database
+          mysql_db:
+            name: test
+            state: absent
+          when: mysql_new_root_pass.changed
 
         - name: Output new root password
           debug:
             msg: "New root password is {{mysql_new_root_pass.stdout}}"
           when: mysql_new_root_pass.changed
-
-        - name: Create my.cnf
-          template:
-            src: templates/mysql/my.cnf.j2
-            dest: /root/.my.cnf
 
         - name: Update root password
           mysql_user:
@@ -76,6 +71,11 @@
             - 127.0.0.1
             - ::1
             - localhost
+
+        - name: Create my.cnf
+          template:
+            src: templates/mysql/my.cnf.j2
+            dest: /root/.my.cnf
 #NginX
 #Nginx
         - name: Install Nginx
