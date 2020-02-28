@@ -59,7 +59,7 @@
         - name: Output new root password
           debug:
             msg: "New root password is {{mysql_new_root_pass.stdout}}"
-            when: mysql_new_root_pass.changed
+          when: mysql_new_root_pass.changed
 
         - name: Create my.cnf
           template:
