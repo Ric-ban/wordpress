@@ -1,7 +1,7 @@
 ---
 
     - name: ping machine cible
-      hosts: wordpress
+      hosts: group_wordpress
       become: yes
       tasks:
         - name: ping_machine_cible
